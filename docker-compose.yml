@@ -1,0 +1,72 @@
+version: "3.6"
+ 
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    container_name: 0xffff-mysql
+    ports:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+    volumes:
+      - ./db-data:/var/lib/mysql
+ 
+  nginx:
+    image: 0xffff-nginx:latest
+    build: ./nginx
+    container_name: 0xffff-nginx
+    restart: always
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx-conf/snippets:/etc/nginx/snippets
+      - ./wwwroot:/wwwroot
+      # - ./.well-known:/wwwroot/.well-known
+    links:
+      - php:php
+    extra_hosts:
+      - "localhost:127.0.0.1"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider --proxy off http://localhost/get-health || exit 1"]
+      interval: 5s
+      retries: 12
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+ 
+  php:
+    image: php-fpm-flarum:7.3.2
+    build: ./php-fpm 
+    container_name: 0xffff-php-fpm
+    restart: always
+    expose:
+      - 9000
+    volumes:
+      - ./logs:/var/log
+      - ./wwwroot:/wwwroot
+      - ./xunsearch/app.ini:/wwwroot/vendor/jjandxa/flarum-ext-chinese-search/app.ini
+    healthcheck:
+      test: ["CMD-SHELL", "pidof php-fpm"]
+      interval: 5s
+      retries: 12
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+
+  xunsearch:
+    image: xunsearch:1.4.13
+    container_name: 0xffff-xunsearch
+    build: ./xunsearch
+    restart: always
+    expose:
+      - 8383
+      - 8384
