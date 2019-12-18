@@ -5,8 +5,8 @@ services:
     image: mysql:5.7
     restart: always
     container_name: 0xffff-mysql
-    ports:
-      - "3306"
+    expose:
+      - 3306
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
@@ -21,8 +21,8 @@ services:
     container_name: 0xffff-nginx
     restart: always
     ports:
-      - "8080:80"
-      - "8443:443"
+      - 8080:80
+      - 8443:443
     volumes:
       - ./logs:/var/log/nginx
       - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
