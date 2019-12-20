@@ -28,7 +28,7 @@ services:
       - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/nginx-conf/snippets:/etc/nginx/snippets
       - ./wwwroot:/wwwroot
-      # - ./.well-known:/wwwroot/.well-known
+      - ./.well-known:/wwwroot/.well-known
     links:
       - php:php
     extra_hosts:
