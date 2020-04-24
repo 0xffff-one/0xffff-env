@@ -24,6 +24,18 @@ RUN apk add \
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring opcache exif
 
+RUN set -xe \
+    && apk add --no-cache --virtual .build-deps \
+    $PHPIZE_DEPS \
+    && cd /tmp && wget -O tideways.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v5.0.2.tar.gz \
+    && tar xfvz tideways.tar.gz && cd php-xhprof-extension-* && phpize && ./configure && make && make install \
+    && docker-php-ext-enable opcache tideways_xhprof \
+    && rm -rf /tmp/* /var/www/*
+
+RUN echo 'tideways.auto_prepend_library=0' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-tideways.ini
+
+RUN apk add --no-cache graphviz ttf-freefont
+
 RUN apk --no-cache add shadow \
     && usermod -u 1000 www-data \
     && groupmod -g 1000 www-data \
