@@ -53,6 +53,7 @@ services:
       - ./logs:/var/log
       - ./wwwroot:/wwwroot
       - ./xunsearch/app.ini:/wwwroot/vendor/jjandxa/flarum-ext-chinese-search/app.ini
+      - ./php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     healthcheck:
       test: ["CMD-SHELL", "pidof php-fpm"]
       interval: 5s
