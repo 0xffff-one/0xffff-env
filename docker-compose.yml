@@ -66,6 +66,8 @@ services:
     image: xunsearch:1.4.13
     container_name: 0xffff-xunsearch
     build: ./xunsearch
+    volumes:
+      - ./search-data:/usr/local/xunsearch/data
     restart: always
     expose:
       - 8383
