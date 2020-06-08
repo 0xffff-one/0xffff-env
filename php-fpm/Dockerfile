@@ -41,6 +41,10 @@ RUN apk --no-cache add shadow \
     && groupmod -g 1000 www-data \
     && rm /var/cache/apk/*
 
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.6 \
+    && docker-php-ext-enable xdebug
+
 ENTRYPOINT ["docker-php-entrypoint"]
 
 STOPSIGNAL SIGQUIT
