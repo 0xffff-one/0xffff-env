@@ -1,6 +1,7 @@
 .DS_Store
 /logs
 /db-data
+/search-data
 /wwwroot
 /.well-known
 .env
