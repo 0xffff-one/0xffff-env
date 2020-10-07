@@ -24,6 +24,14 @@ RUN apk add \
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring opcache exif
 
+RUN apk add autoconf automake make gcc g++ libtool pkgconfig 
+
+# Install APCu and APC backward compatibility
+RUN pecl install apcu \
+    && pecl install apcu_bc-1.0.3 \
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
+    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
+
 RUN apk --no-cache add shadow \
     && usermod -u 1000 www-data \
     && groupmod -g 1000 www-data \
