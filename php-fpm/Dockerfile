@@ -12,11 +12,12 @@ RUN apk add \
         freetype-dev \
         libpng \
         libpng-dev \
+        gmp-dev \
         oniguruma-dev \
         libjpeg-turbo \
         libjpeg-turbo-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) gd gmp \
     && apk del \
         freetype-dev \
         libpng-dev \
