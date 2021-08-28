@@ -14,7 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     volumes:
       - ./db-data:/var/lib/mysql
- 
+
   nginx:
     image: 0xffff-nginx:latest
     build: ./nginx
@@ -41,7 +41,7 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
- 
+
   php:
     image: php-fpm-flarum:7.3.2
     build: ./php-fpm 
@@ -52,7 +52,6 @@ services:
     volumes:
       - ./logs:/var/log
       - ./wwwroot:/wwwroot
-      - ./xunsearch/app.ini:/wwwroot/vendor/jjandxa/flarum-ext-chinese-search/app.ini
     healthcheck:
       test: ["CMD-SHELL", "pidof php-fpm"]
       interval: 5s
@@ -61,14 +60,3 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
-
-  xunsearch:
-    image: xunsearch:1.4.13
-    container_name: 0xffff-xunsearch
-    build: ./xunsearch
-    volumes:
-      - ./search-data:/usr/local/xunsearch/data
-    restart: always
-    expose:
-      - 8383
-      - 8384
