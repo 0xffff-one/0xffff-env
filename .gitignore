@@ -2,6 +2,7 @@
 /logs
 /db-data
 /search-data
+/sonic-store
 /wwwroot
 /.well-known
 .env
