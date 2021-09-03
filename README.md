@@ -6,11 +6,11 @@
 * Nginx: 静态文件服务器，fastcgi 反代
 * PHP-FPM: PHP 运行时
 * MySQL: 数据库服务
-* xunsearch: Flarum 中文搜索支持
+* [Sonic](https://github.com/ganuonglachanh/flarum-sonic): Flarum 中文搜索支持
 
 ## 配置
-在启动前，需创建 `.env` 文件，`docker-compose.yml` 加载时会替换其中内容。  
-例子：
+在启动前，需在根目录创建 `.env` 文件，`docker-compose.yml` 加载时会替换其中内容。  
+`.env` 的内容例子：
 ```
 DB_NAME=flarum
 DB_USER=flarum_0xffff
