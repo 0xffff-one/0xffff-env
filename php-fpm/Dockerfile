@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.0-fpm-alpine
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
@@ -17,25 +17,22 @@ RUN apk add \
         libjpeg-turbo \
         libjpeg-turbo-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd gmp \
+    && docker-php-ext-install -j$(nproc) gd gmp pdo_mysql exif \
     && apk del \
         freetype-dev \
         libpng-dev \
-        libjpeg-turbo-dev
-
-RUN docker-php-ext-install pdo pdo_mysql mbstring opcache exif
+        libjpeg-turbo-dev \
+        gmp-dev 
 
 RUN apk add autoconf automake make gcc g++ libtool pkgconfig 
 
-# Install APCu and APC backward compatibility
+# Install APCu
 RUN pecl install apcu \
-    && pecl install apcu_bc-1.0.3 \
-    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini \
-    && docker-php-ext-enable apc --ini-name 20-docker-php-ext-apc.ini
+    && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini
 
 RUN apk --no-cache add shadow \
-    && usermod -u 1000 www-data \
-    && groupmod -g 1000 www-data \
+    && usermod -u 500 www-data \
+    && groupmod -g 500 www-data \
     && rm /var/cache/apk/*
 
 ENTRYPOINT ["docker-php-entrypoint"]

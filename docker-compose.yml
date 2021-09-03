@@ -44,7 +44,7 @@ services:
         max-size: "100m"
 
   php:
-    image: php-fpm-flarum:7.4
+    image: php-fpm-flarum:8.0
     build: ./php-fpm 
     container_name: 0xffff-php-fpm
     restart: always
