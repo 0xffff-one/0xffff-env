@@ -61,3 +61,13 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
+
+  sonic:
+    image: valeriansaliou/sonic:v1.3.0
+    container_name: 0xffff-sonic
+    volumes:
+      - ./sonic-store:/var/lib/sonic/store
+      - ./sonic/config.cfg:/etc/sonic.cfg
+    restart: always
+    expose:
+      - 1491
