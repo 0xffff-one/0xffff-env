@@ -14,7 +14,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     volumes:
       - ./db-data:/var/lib/mysql
- 
+      - ./mysql/ngram.cnf:/etc/mysql/conf.d/ngram.cnf
+
   nginx:
     image: 0xffff-nginx:latest
     build: ./nginx
@@ -41,9 +42,9 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
- 
+
   php:
-    image: php-fpm-flarum:7.3.2
+    image: php-fpm-flarum:7.4
     build: ./php-fpm 
     container_name: 0xffff-php-fpm
     restart: always
@@ -52,7 +53,6 @@ services:
     volumes:
       - ./logs:/var/log
       - ./wwwroot:/wwwroot
-      - ./xunsearch/app.ini:/wwwroot/vendor/jjandxa/flarum-ext-chinese-search/app.ini
     healthcheck:
       test: ["CMD-SHELL", "pidof php-fpm"]
       interval: 5s
@@ -62,12 +62,12 @@ services:
       options:
         max-size: "100m"
 
-  xunsearch:
-    image: xunsearch:1.4.13
-    container_name: 0xffff-xunsearch
-    build: ./xunsearch
+  sonic:
+    image: valeriansaliou/sonic:v1.3.0
+    container_name: 0xffff-sonic
     volumes:
-      - ./search-data:/usr/local/xunsearch/data
+      - ./sonic-store:/var/lib/sonic/store
+      - ./sonic/config.cfg:/etc/sonic.cfg
     restart: always
     expose:
       - 8383
