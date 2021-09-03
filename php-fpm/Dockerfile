@@ -31,8 +31,8 @@ RUN pecl install apcu \
     && docker-php-ext-enable apcu --ini-name 10-docker-php-ext-apcu.ini
 
 RUN apk --no-cache add shadow \
-    && usermod -u 500 www-data \
-    && groupmod -g 500 www-data \
+    && usermod -u 1000 www-data \
+    && groupmod -g 1000 www-data \
     && rm /var/cache/apk/*
 
 ENTRYPOINT ["docker-php-entrypoint"]
