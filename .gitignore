@@ -3,6 +3,7 @@
 /db-data
 /search-data
 /sonic-store
+/redis-data
 /wwwroot
 /.well-known
 .env

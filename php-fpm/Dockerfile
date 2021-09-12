@@ -39,5 +39,8 @@ ENTRYPOINT ["docker-php-entrypoint"]
 
 STOPSIGNAL SIGQUIT
 
+COPY ./start.sh /usr/local/bin/start
+RUN chmod u+x /usr/local/bin/start
+
 EXPOSE 9000
-CMD ["php-fpm"]
+CMD ["/usr/local/bin/start"]

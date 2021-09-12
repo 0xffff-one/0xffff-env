@@ -47,6 +47,8 @@ services:
     image: php-fpm-flarum:8.0
     build: ./php-fpm 
     container_name: 0xffff-php-fpm
+    depends_on:
+      - redis
     restart: always
     expose:
       - 9000
@@ -61,6 +63,42 @@ services:
       driver: "json-file"
       options:
         max-size: "100m"
+
+  # https://laravel-news.com/laravel-scheduler-queue-docker
+  scheduler:
+    image: php-fpm-flarum:8.0
+    container_name: 0xffff-scheduler
+    depends_on:
+      - php
+    restart: always
+    volumes:
+      - ./logs:/var/log
+      - ./wwwroot:/wwwroot
+    environment:
+      CONTAINER_ROLE: scheduler
+
+  # queue worker
+  queue_worker:
+    image: php-fpm-flarum:8.0
+    container_name: 0xffff-queue-worker
+    depends_on:
+      - php
+    restart: always
+    volumes:
+      - ./logs:/var/log
+      - ./wwwroot:/wwwroot
+    environment:
+      CONTAINER_ROLE: queue
+
+  # redis for queue and session
+  redis:
+    image: redis:6.2.5
+    container_name: 0xffff-redis
+    volumes:
+      - ./redis-data:/data
+    restart: always
+    expose:
+      - 6379
 
   sonic:
     image: valeriansaliou/sonic:v1.3.0
