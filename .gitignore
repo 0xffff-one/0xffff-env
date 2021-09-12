@@ -1,9 +1,7 @@
 .DS_Store
 /logs
-/db-data
-/search-data
-/sonic-store
-/redis-data
+db-data
+sonic-store
+redis-data
 /wwwroot
-/.well-known
 .env
