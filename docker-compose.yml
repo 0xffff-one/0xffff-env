@@ -28,7 +28,8 @@ services:
       - ./logs:/var/log/nginx
       - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/nginx-conf/snippets:/etc/nginx/snippets
-      - ./wwwroot:/wwwroot
+      - ./data/app/assets:/wwwroot/public/assets
+      - app-root:/wwwroot
     links:
       - php:php
     extra_hosts:
@@ -43,9 +44,9 @@ services:
         max-size: "100m"
 
   php:
-    image: php-fpm-flarum:8.0
-    build: ./php-fpm 
-    container_name: 0xffff-php-fpm
+    image: zgq354/0xffff-flarum:latest
+    # build: ./php-fpm 
+    container_name: 0xffff-app
     depends_on:
       - redis
     restart: always
@@ -53,7 +54,10 @@ services:
       - 9000
     volumes:
       - ./logs:/var/log
-      - ./wwwroot:/wwwroot
+      - app-root:/wwwroot
+      - ./data/app/storage:/wwwroot/storage
+      - ./data/app/assets:/wwwroot/public/assets
+      - ./data/app/config.php:/wwwroot/config.php
     healthcheck:
       test: ["CMD-SHELL", "pidof php-fpm"]
       interval: 5s
@@ -65,27 +69,33 @@ services:
 
   # https://laravel-news.com/laravel-scheduler-queue-docker
   scheduler:
-    image: php-fpm-flarum:8.0
+    image: zgq354/0xffff-flarum:latest
     container_name: 0xffff-scheduler
     depends_on:
       - php
     restart: always
     volumes:
       - ./logs:/var/log
-      - ./wwwroot:/wwwroot
+      - app-root:/wwwroot
+      - ./data/app/storage:/wwwroot/storage
+      - ./data/app/assets:/wwwroot/public/assets
+      - ./data/app/config.php:/wwwroot/config.php
     environment:
       CONTAINER_ROLE: scheduler
 
   # queue worker
   queue_worker:
-    image: php-fpm-flarum:8.0
+    image: zgq354/0xffff-flarum:latest
     container_name: 0xffff-queue-worker
     depends_on:
       - php
     restart: always
     volumes:
       - ./logs:/var/log
-      - ./wwwroot:/wwwroot
+      - app-root:/wwwroot
+      - ./data/app/storage:/wwwroot/storage
+      - ./data/app/assets:/wwwroot/public/assets
+      - ./data/app/config.php:/wwwroot/config.php
     environment:
       CONTAINER_ROLE: queue
 
@@ -108,3 +118,6 @@ services:
     restart: always
     expose:
       - 1491
+
+volumes: 
+  app-root:

@@ -1,7 +1,8 @@
 .DS_Store
+/data/app
+/data/db-data
+/data/sonic-store
+/data/redis-data
 /logs
-db-data
-sonic-store
-redis-data
 /wwwroot
 .env
