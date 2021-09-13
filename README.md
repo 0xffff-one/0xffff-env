@@ -18,5 +18,14 @@ DB_PASS=748OwVlAvgmj
 DB_ROOT_PASS=mcXu71c90rIu
 ```
 
+## 本地开发
+线上会直接用构建好的容器来跑，本地开发环境则需要单独绑定代码目录，通过另一个 compose 配置来启动
+```
+# 链接到 0xffff-flarum 的本地开发目录
+ln -s wwwroot /path/to/0xffff-flarum
+# 使用非默认 docker-compose.yml 启动
+docker-compose -f docker-compose.dev.yml up -d
+```
+
 ## LICENSE
 MIT
