@@ -22,8 +22,8 @@ services:
     container_name: 0xffff-nginx
     restart: always
     ports:
-      - 8080:80
-      - 8443:443
+      - ${NGINX_HTTP_PORT:-8080}:80
+      - ${NGINX_HTTPS_PORT:-8443}:443
     volumes:
       - ./logs:/var/log/nginx
       - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
