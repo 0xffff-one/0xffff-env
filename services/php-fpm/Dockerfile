@@ -30,13 +30,18 @@ RUN \
     && mv composer.phar /usr/local/bin/composer \
     # set uid
     && usermod -u 1000 www-data \
-    && groupmod -g 1000 www-data \
+    && groupmod -g 1000 www-data
     # clean
-    && apk del autoconf automake make gcc g++ libtool pkgconfig shadow \
-        freetype-dev \
-        libpng-dev \
-        libjpeg-turbo-dev \
-    && rm /var/cache/apk/*
+    # && apk del autoconf automake make gcc g++ libtool pkgconfig shadow \
+    #     freetype-dev \
+    #     libpng-dev \
+    #     libjpeg-turbo-dev \
+    # && rm /var/cache/apk/*
+
+# xdebug
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-3.1.0beta2 \
+    && docker-php-ext-enable xdebug
 
 # start up
 ENTRYPOINT ["docker-php-entrypoint"]

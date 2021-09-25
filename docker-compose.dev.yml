@@ -29,8 +29,6 @@ services:
       - ./services/nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
       - ./services/nginx/nginx-conf/snippets:/etc/nginx/snippets
       - ./wwwroot:/wwwroot
-    links:
-      - php:php
     extra_hosts:
       - "localhost:127.0.0.1"
     healthcheck:
@@ -54,6 +52,9 @@ services:
     volumes:
       - ./logs:/var/log
       - ./wwwroot:/wwwroot
+      - ./services/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    extra_hosts:
+      - xdebugdevhost:${XDEBUG_DEV_HOST:-127.0.0.1}
     healthcheck:
       test: ["CMD-SHELL", "pidof php-fpm"]
       interval: 5s
