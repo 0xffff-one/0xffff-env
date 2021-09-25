@@ -14,11 +14,11 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
     volumes:
       - ./data/db-data:/var/lib/mysql
-      - ./mysql/ngram.cnf:/etc/mysql/conf.d/ngram.cnf
+      - ./services/mysql/ngram.cnf:/etc/mysql/conf.d/ngram.cnf
 
   nginx:
     image: 0xffff-nginx:latest
-    build: ./nginx
+    build: ./services/nginx
     container_name: 0xffff-nginx
     restart: always
     ports:
@@ -26,8 +26,8 @@ services:
       - ${NGINX_HTTPS_PORT:-8443}:443
     volumes:
       - ./logs:/var/log/nginx
-      - ./nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/nginx-conf/snippets:/etc/nginx/snippets
+      - ./services/nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
+      - ./services/nginx/nginx-conf/snippets:/etc/nginx/snippets
       - ./wwwroot:/wwwroot
     links:
       - php:php
@@ -44,7 +44,7 @@ services:
 
   php:
     image: php-fpm-flarum:8.0
-    build: ./php-fpm 
+    build: ./services/php-fpm 
     container_name: 0xffff-php-fpm
     depends_on:
       - redis
@@ -104,7 +104,7 @@ services:
     container_name: 0xffff-sonic
     volumes:
       - ./data/sonic-store:/var/lib/sonic/store
-      - ./sonic/config.cfg:/etc/sonic.cfg
+      - ./services/sonic/config.cfg:/etc/sonic.cfg
     restart: always
     expose:
       - 1491
