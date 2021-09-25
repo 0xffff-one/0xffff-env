@@ -43,7 +43,7 @@ services:
         max-size: "100m"
 
   php:
-    image: php-fpm-flarum:8.0
+    image: php-fpm-dev:latest
     build: ./services/php-fpm 
     container_name: 0xffff-php-fpm
     depends_on:
@@ -65,7 +65,7 @@ services:
 
   # https://laravel-news.com/laravel-scheduler-queue-docker
   scheduler:
-    image: php-fpm-flarum:8.0
+    image: php-fpm-dev:latest
     container_name: 0xffff-scheduler
     depends_on:
       - php
@@ -78,7 +78,7 @@ services:
 
   # queue worker
   queue_worker:
-    image: php-fpm-flarum:8.0
+    image: php-fpm-dev:latest
     container_name: 0xffff-queue-worker
     depends_on:
       - php
