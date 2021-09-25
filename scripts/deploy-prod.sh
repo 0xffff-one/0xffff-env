@@ -8,5 +8,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 sudo docker pull zgq354/0xffff-flarum:latest \
     && cd $SCRIPTPATH/.. \
+    && sudo mkdir -p data/nginx-public \
+    && sudo docker run --rm -v $SCRIPTPATH/../data/nginx-public:/nginx-public zgq354/0xffff-flarum:latest rsync -av /wwwroot/public/ /nginx-public/ \
     && sudo docker-compose up -d --build --remove-orphans \
     && sudo docker exec -it 0xffff-app php flarum cache:clear
