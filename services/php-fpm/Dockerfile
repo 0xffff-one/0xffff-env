@@ -43,6 +43,16 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install xdebug-3.1.0beta2 \
     && docker-php-ext-enable xdebug
 
+# xhprof
+RUN set -xe \
+    && apk add --no-cache --virtual .build-deps graphviz ttf-freefont \
+    $PHPIZE_DEPS \
+    && cd /tmp && wget -O tideways.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v5.0.4.tar.gz \
+    && tar xfvz tideways.tar.gz && cd php-xhprof-extension-* && phpize && ./configure && make && make install \
+    && docker-php-ext-enable opcache tideways_xhprof \
+    && rm -rf /tmp/* /var/www/* \
+    && echo 'tideways.auto_prepend_library=0' >> ${PHP_INI_DIR}/conf.d/docker-php-ext-tideways.ini
+
 # start up
 ENTRYPOINT ["docker-php-entrypoint"]
 STOPSIGNAL SIGQUIT
