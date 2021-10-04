@@ -1,0 +1,122 @@
+/*  Copyright (c) 2009 Facebook
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+/**
+ * © 2016 SugarCRM Inc.  Licensed by SugarCRM under the Apache 2.0 license.
+ */
+
+td.sorted {
+  color:#0000FF;
+}
+th.sortable {
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+p.blue  {
+  color:blue
+}
+
+.bubble {
+  background-color:#C3D9FF
+}
+
+ul.xhprof_actions {
+  float: right;
+  padding-left: 16px;
+  list-style-image: none;
+  list-style-type: none;
+  margin:10px 10px 10px 3em;
+  position:relative;
+}
+
+ul.xhprof_actions li {
+  border-bottom:1px solid #D8DFEA;
+}
+
+ul.xhprof_actions li a:hover {
+  background:#3B5998 none repeat scroll 0 0;
+  color:#FFFFFF;
+}
+
+.align-right{text-align: right;}
+.align-center{text-align: center;}
+
+.top-right-link {float:right;margin-left:10px;}
+.ut-top {position: relative;}
+.ut-top .ut-list {position:absolute;right:0;background-color: white;display:none;box-shadow: 10px 10px 5px #888888;padding:5px;border:1px solid black;}
+.ut-top:hover .ut-list{display: block;}
+.ut-top .ut-list tr {white-space: nowrap;}
+.ut-top .ut-list tr td {padding:2px;}
+.ut-top .ut-list tr:hover {background-color: #DFD8F0;}
+
+
+
+#tbl, .ut-top .ut-list table {border-spacing: 0;}
+#tbl a {text-decoration: none;}
+#tbl a:hover {text-decoration: underline;}
+#tbl tr.run:hover {background-color: #f5f5f5;}
+#tbl .btn-compare {padding: 5px; font-weight: bolder;}
+#tbl .age-bar {border-bottom:1px solid #DDD; color:gray;}
+
+.query-container {max-height:200px; overflow:hidden; position: relative; display:none;}
+.query-container.active {display: inherit;}
+.query-container.query-container-expanded {max-height:inherit; margin-bottom: 30px; overflow:visible;}
+.query-container.query-container-expanded .show-more-button {background: transparent; bottom: -28px; height: 28px;}
+.query-container .show-more-button {
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    background: rgba(255,255,255,0);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(254,254,254,0.95) 40%, rgba(254,254,254, 1) 67%, rgba(254,254,254,1) 100%);
+}
+.query-container .show-more-button button {position:absolute; bottom:0; padding: 0;}
+
+.query .hljs{background: transparent;}
+.query pre {margin: 0;}
+.query pre code {padding: 0;}
+.traces-list {padding-left: 15px;border-left: 3px solid #eee;}
+
+.btn-link:focus {outline: 0 !important;}
+.btn.btn-format-sql {font-weight: bold;}
+.query .btn-show-traces {padding-left: 0; border: 0;}
+.query .btn-show-traces .glyphicon {color:#777;}
+.table.table-functions td {padding: 1px; font-size: 12px; text-align: right; min-width: 40px;}
+.table.table-functions td.sorted-by {color: #347AB7;}
+.table.table-functions td:first-child {text-align: left;}
+.table.table-functions th {padding: 3px; font-size: 14px;}
+.table.table-functions thead tr,
+    .table.table-functions tbody tr:hover,
+    .table.table-functions tbody tr.no-hover {background-color: #f5f5f5;}
+
+.panel-functions {display: inline-block; min-width: 100%;}
+
+.sql-matched-chunk {background-color: wheat;}
+.container-fluid .tooltip-inner {max-width:inherit;}
+
+.input-suggestions {position: absolute; min-width: calc(100% - 33px); border: 1px solid #ccc; top: calc(100% - 1px);
+    font-size: 10px; background-color: white;}
+.input-suggestions tr {border-bottom: 1px solid #ddd; cursor:pointer;}
+.input-suggestions tr:last-child {border-bottom: none;}
+.input-suggestions tr.active {background-color: #f5f5f5;}
+.input-suggestions td {padding: 5px 10px; width:1px; text-align: right; white-space: nowrap; color:#aaa;}
+.input-suggestions td:first-child {width:auto; text-align: left; color:inherit; font-size: 12px; }
+
+.btn-overall-summary {position: relative;}
+.btn-overall-summary div {display:none; position:absolute; background-color: white; right: 0; z-index:100;
+    top:calc(100% + 1px); box-shadow: 3px 6px 10px -2px rgba(0,0,0,0.3);}
+.btn-overall-summary:hover div {display:block;}
+.btn-overall-summary div table {margin-bottom: 0;}

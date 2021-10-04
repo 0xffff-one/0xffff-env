@@ -1,0 +1,13 @@
+{
+    "name": "zgq354/fcgi-client",
+    "type": "project",
+    "authors": [
+        {
+            "name": "zgq354",
+            "email": "zgq354@gmail.com"
+        }
+    ],
+    "require": {
+        "hollodotme/fast-cgi-client": "^3.1"
+    }
+}

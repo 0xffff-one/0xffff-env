@@ -1,0 +1,5 @@
+.idea/
+/config_override.php
+
+.DS_Store
+*.tgz

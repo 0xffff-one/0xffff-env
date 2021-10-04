@@ -28,6 +28,8 @@ services:
       - ./logs:/var/log/nginx
       - ./services/nginx/nginx-conf/docker-nginx.conf:/etc/nginx/nginx.conf
       - ./services/nginx/nginx-conf/snippets:/etc/nginx/snippets
+      # xhprof
+      # - ./services/xhprof/viewer:/wwwroot/public/xhprof-viewer
       - ./wwwroot:/wwwroot
     extra_hosts:
       - "localhost:127.0.0.1"
@@ -51,6 +53,10 @@ services:
       - 9000
     volumes:
       - ./logs:/var/log
+      # xhprof
+      - ./services/xhprof:/xhprof
+      # xhprof entry
+      - ./services/xhprof/index_override.php:/wwwroot/public/index.php
       - ./wwwroot:/wwwroot
       - ./services/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     extra_hosts:
