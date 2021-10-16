@@ -30,6 +30,8 @@ services:
       - ./services/nginx/nginx-conf/snippets:/etc/nginx/snippets:ro
       - ./data/app/assets:/wwwroot/public/assets:ro
       - ./data/nginx-public:/wwwroot/public:ro
+    environment:
+      TZ: 'Asia/Shanghai'
     extra_hosts:
       - "localhost:127.0.0.1"
     healthcheck:

@@ -31,6 +31,8 @@ services:
       # xhprof
       # - ./services/xhprof/viewer:/wwwroot/public/xhprof-viewer
       - ./wwwroot:/wwwroot
+    environment:
+      TZ: 'Asia/Shanghai'
     extra_hosts:
       - "localhost:127.0.0.1"
     healthcheck:
