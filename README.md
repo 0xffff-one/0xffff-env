@@ -1,6 +1,10 @@
 # 0xFFFF Env
 [0xFFFF](https://0xffff.one) 社区网站基础环境配置，基于 Docker, Docker Compose 构建
 
+2022.5.15 更新：环境相关配置已整合至 [0xffff-flarum](https://github.com/0xffff-one/0xffff-flarum)，本项目废弃
+
+---------
+
 ## 技术栈
 标准的 LNMP 架构
 * Nginx: 静态文件服务器，fastcgi 反代
